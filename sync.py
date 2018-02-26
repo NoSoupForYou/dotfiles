@@ -120,7 +120,15 @@ def main(argv=None):
     dotfiles = abspath(dirname(__file__))
     homedir = abspath(expanduser("~"))
 
-    parser = ArgumentParser(description="Commit rc files to source control")
+    parser = ArgumentParser(
+        description="Sync user rc files with this repo",
+        epilog=(
+            "When comparing existing files, targets "
+            "modified after their corresponding source file will be identified as 'conflicts'. "
+            "These can be resolved either by overwriting the target with the source, or by "
+            "updating the repository files with the latest off-sync changes."
+        )
+    )
     parser.add_argument("-s", "--srcdir", help="Source directory", default=dotfiles)
     parser.add_argument(
         "-t", "--targetdir", help="Target directory, defaults to ~", default=homedir)
